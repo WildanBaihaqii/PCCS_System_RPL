@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router';
-import { CheckCircle, Clock, Package, FileCheck, AlertCircle, MessageSquare, HourglassIcon } from 'lucide-react';
+import { CheckCircle, Clock, Package, FileCheck, AlertCircle, MessageSquare, HourglassIcon, Download } from 'lucide-react';
 import Layout from './Layout';
-import { loadComplaints } from '../utils/storage';
+import { loadComplaints, findComplaint } from '../utils/storage';
+import { exportComplaintToPDF } from '../utils/export';
+import { showSuccess } from './ToastNotification';
 
 interface User { role: 'student' | 'admin'; name: string; id: string; }
 interface Props { user: User; onLogout: () => void; }
@@ -79,14 +81,26 @@ export default function ComplaintTracking({ user, onLogout }: Props) {
                     <h3 className="font-bold text-foreground">{c.title}</h3>
                     <p className="text-xs text-muted-foreground mt-1">{c.category} · {c.date}</p>
                   </div>
-                  <button
-                    onClick={() => navigate(`/chat/${c.id}`)}
-                    className="flex items-center gap-1.5 px-4 py-2 text-primary-foreground text-xs font-semibold rounded-xl hover:opacity-90 active:scale-95 transition-all flex-shrink-0"
-                    style={{ background: 'var(--pccs-primary-gradient)' }}
-                  >
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    Chat
-                  </button>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={() => navigate(`/chat/${c.id}`)}
+                      className="flex items-center gap-1.5 px-4 py-2 text-primary-foreground text-xs font-semibold rounded-xl hover:opacity-90 active:scale-95 transition-all"
+                      style={{ background: 'var(--pccs-primary-gradient)' }}
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      Chat
+                    </button>
+                    <button
+                      onClick={() => {
+                        exportComplaintToPDF(c);
+                        showSuccess('Laporan siap untuk diprint/simpan sebagai PDF');
+                      }}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold rounded-xl hover:bg-emerald-100 active:scale-95 transition-all"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      Export
+                    </button>
+                  </div>
                 </div>
 
                 <div className="mt-4">

@@ -8,6 +8,7 @@ import ComplaintTracking from './components/ComplaintTracking';
 import ChatRoom from './components/ChatRoom';
 import Statistics from './components/Statistics';
 import Wireframes from './components/Wireframes';
+import { ToastContainer } from './components/ToastNotification';
 
 export default function App() {
   const [user, setUser] = useState<{ role: 'student' | 'admin' | null; name: string; id: string } | null>(null);
@@ -30,7 +31,9 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
       <Routes>
         <Route
           path="/"
@@ -91,5 +94,6 @@ export default function App() {
         />
       </Routes>
     </BrowserRouter>
+    </>
   );
 }

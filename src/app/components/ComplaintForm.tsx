@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Send, Paperclip, CheckCircle, BookOpen, Wrench, Leaf, User, Hash, ArrowLeft, ArrowRight } from 'lucide-react';
 import Layout from './Layout';
 import { addComplaint } from '../utils/storage';
+import { showSuccess, showError } from './ToastNotification';
 
 interface User { role: 'student' | 'admin'; name: string; id: string; }
 interface Props { user: User; onLogout: () => void; }
@@ -28,9 +29,35 @@ export default function ComplaintForm({ user, onLogout }: Props) {
   const [step, setStep]             = useState(1);
   const [done, setDone]             = useState(false);
 
+  const validateForm = (): boolean => {
+    if (!title.trim()) {
+      showError('Judul laporan tidak boleh kosong');
+      return false;
+    }
+    if (title.length < 10) {
+      showError('Judul laporan minimal 10 karakter');
+      return false;
+    }
+    if (!category) {
+      showError('Kategori laporan harus dipilih');
+      return false;
+    }
+    if (!description.trim()) {
+      showError('Deskripsi laporan tidak boleh kosong');
+      return false;
+    }
+    if (description.length < 20) {
+      showError('Deskripsi laporan minimal 20 karakter');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // persist complaint
+    
+    if (!validateForm()) return;
+
     addComplaint({
       title,
       category,
@@ -39,6 +66,7 @@ export default function ComplaintForm({ user, onLogout }: Props) {
       reporter: user.name,
       reporterId: user.id,
     });
+    showSuccess('Laporan Anda berhasil dikirim! Admin akan segera meninjau.');
     setDone(true);
     setTimeout(() => navigate('/dashboard'), 1200);
   };
