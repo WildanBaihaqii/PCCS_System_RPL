@@ -2,10 +2,10 @@
 
 [![CI](https://github.com/WildanBaihaqii/PCCS_System_RPL/actions/workflows/ci.yml/badge.svg)](https://github.com/WildanBaihaqii/PCCS_System_RPL/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-<img width="1920" height="960" alt="image" src="https://github.com/user-attachments/assets/d1487826-f12c-4316-a4c0-e4c2dd068d77" />
-
 
 >Sistem Pengaduan Digital sederhana untuk Politeknik Negeri Cilacap — UI React + Tailwind + Vite.
+## UI
+<img width="1920" height="960" alt="image" src="https://github.com/user-attachments/assets/89ee98c1-ba6d-4795-a2ba-f15dfc7bc07a" />
 
 ## Prasyarat
 
