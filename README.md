@@ -1,5 +1,3 @@
-<img width="1920" height="960" alt="image" src="https://github.com/user-attachments/assets/a5d15aa5-10a1-411c-b7ab-1c0539408bd1" /># PCCS_System_RPL
-
 [![CI](https://github.com/WildanBaihaqii/PCCS_System_RPL/actions/workflows/ci.yml/badge.svg)](https://github.com/WildanBaihaqii/PCCS_System_RPL/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
